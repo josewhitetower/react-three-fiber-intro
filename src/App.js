@@ -7,13 +7,18 @@ import { OrbitControls } from "@react-three/drei";
 const Box = (props) => {
   const ref = useRef();
   useFrame(() => {
-    ref.current.rotation.x += 0.01;
+    // ref.current.rotation.x += 0.01;
     ref.current.rotation.y += 0.01;
   });
   return (
     <mesh ref={ref} {...props} castShadow>
       <boxBufferGeometry />
-      <meshPhysicalMaterial color="orange" />
+      <meshPhysicalMaterial
+        color="orange"
+        fog={false}
+        transparent
+        opacity={0.6}
+      />
     </mesh>
   );
 };
@@ -42,11 +47,12 @@ function App() {
       <Canvas
         shadows
         style={{ backgroundColor: "black" }}
-        camera={{ position: [3, 3, 3] }}
+        camera={{ position: [1, 5, 1] }}
       >
+        <fog args={["white", 1, 10]} attach="fog" />
         <ambientLight intensity={0.2} />
         <Bulb position={[0, 3, 0]} />
-        <Box position={[-1, 1, 2]} />
+        <Box position={[0, 1, 0]} />
         <Floor position={[0, -0.5, 0]} />
         <axesHelper args={[5]} />
         <OrbitControls />
