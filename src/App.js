@@ -1,16 +1,12 @@
 import "./App.css";
 
-import { Canvas, useFrame, extend, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-extend({ OrbitControls });
-const Orbit = () => {
-  const { camera, gl } = useThree();
-  return <orbitControls args={[camera, gl.domElement]} />;
-};
+import { OrbitControls } from "@react-three/drei";
+
 const Box = (props) => {
   const ref = useRef();
-  useFrame((state) => {
+  useFrame(() => {
     ref.current.rotation.x += 0.01;
     ref.current.rotation.y += 0.01;
   });
@@ -53,7 +49,7 @@ function App() {
         <Box position={[-1, 1, 2]} />
         <Floor position={[0, -0.5, 0]} />
         <axesHelper args={[5]} />
-        <Orbit />
+        <OrbitControls />
       </Canvas>
     </div>
   );
