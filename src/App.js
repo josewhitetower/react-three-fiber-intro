@@ -3,21 +3,27 @@ import "./App.css";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
-
+import * as THREE from "three";
 const Box = (props) => {
   const ref = useRef();
   useFrame(() => {
-    // ref.current.rotation.x += 0.01;
+    ref.current.rotation.x += 0.01;
     ref.current.rotation.y += 0.01;
   });
   return (
     <mesh ref={ref} {...props} castShadow>
       <boxBufferGeometry />
       <meshPhysicalMaterial
-        color="orange"
-        fog={false}
+        color="white"
+        // fog={false}
         transparent
-        opacity={0.6}
+        // opacity={0.6}
+        // wireframe
+        roughness={0}
+        clearcoat={1}
+        transmission={0.7}
+        reflectivity={1}
+        side={THREE.DoubleSide}
       />
     </mesh>
   );
